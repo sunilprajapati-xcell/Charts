@@ -352,7 +352,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 guard let e = dataSet.entryForIndex(i) as? BarChartDataEntry else { continue }
                 
                 x = e.x
-                
+    
                 _barShadowRectBuffer.origin.x = CGFloat(x - barWidthHalf)
                 _barShadowRectBuffer.size.width = CGFloat(barWidth)
                 
@@ -410,6 +410,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         // In case the chart is stacked, we need to accomodate individual bars within accessibilityOrdereredElements
         let isStacked = dataSet.isStacked
         let stackSize = isStacked ? dataSet.stackSize : 1
+       
 
         for j in stride(from: 0, to: buffer.rects.count, by: 1)
         {
@@ -454,6 +455,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
 
                 accessibilityOrderedElements[j/stackSize].append(element)
             }
+            
         }
         
         context.restoreGState()
@@ -799,6 +801,12 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                         
                         y1 = range?.from ?? 0.0
                         y2 = range?.to ?? 0.0
+                    }
+                    if e.rounded{
+                        var rounded = UIBezierPath(roundedRect: barRect, cornerRadius: barRect.size.width/2)
+                        rounded.fill()
+                    }else{
+                        context.fill(barRect)
                     }
                 }
                 else

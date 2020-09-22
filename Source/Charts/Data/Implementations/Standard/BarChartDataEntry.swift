@@ -16,6 +16,8 @@ open class BarChartDataEntry: ChartDataEntry
     /// the values the stacked barchart holds
     private var _yVals: [Double]?
     
+    public var rounded: Bool = false
+    
     /// the ranges for the individual stack values - automatically calculated
     private var _ranges: [Range]?
     
