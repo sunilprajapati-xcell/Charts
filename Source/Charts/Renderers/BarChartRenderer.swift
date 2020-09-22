@@ -372,7 +372,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 _barShadowRectBuffer.size.height = viewPortHandler.contentHeight
                 
                 context.setFillColor(dataSet.barShadowColor.cgColor)
-                context.fill(_barShadowRectBuffer)
+                if e.rounded{
+                    let rounded = UIBezierPath(roundedRect: _barShadowRectBuffer, cornerRadius: _barShadowRectBuffer.size.width/2)
+                    rounded.fill()
+                }else{
+                    context.fill(_barShadowRectBuffer)
+                }
+                
             }
         }
 
