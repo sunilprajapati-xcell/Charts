@@ -373,7 +373,9 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 
                 context.setFillColor(dataSet.barShadowColor.cgColor)
                 if e.rounded{
-                    let rounded = UIBezierPath(roundedRect: _barShadowRectBuffer, cornerRadius: _barShadowRectBuffer.size.width/2)
+                    let rounded = UIBezierPath(roundedRect: _barShadowRectBuffer,
+                                               byRoundingCorners: [.topLeft, .topRight],
+                               cornerRadii: CGSize(width: _barShadowRectBuffer.size.width/2, height: _barShadowRectBuffer.size.width/2))
                     rounded.fill()
                 }else{
                     context.fill(_barShadowRectBuffer)
@@ -440,7 +442,9 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             
             guard let e = dataSet.entryForIndex(j) as? BarChartDataEntry else { continue }
             if e.rounded{
-                let rounded = UIBezierPath(roundedRect: barRect, cornerRadius: barRect.size.width/2)
+                let rounded = UIBezierPath(roundedRect: barRect,
+                                           byRoundingCorners: [.topLeft, .topRight],
+                           cornerRadii: CGSize(width: barRect.size.width/2, height: barRect.size.width/2))
                 rounded.fill()
             }else{
                 context.fill(barRect)
@@ -815,7 +819,9 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                         y2 = range?.to ?? 0.0
                     }
                     if e.rounded{
-                        var rounded = UIBezierPath(roundedRect: barRect, cornerRadius: barRect.size.width/2)
+                        let rounded = UIBezierPath(roundedRect: barRect,
+                                                   byRoundingCorners: [.topLeft, .topRight],
+                                   cornerRadii: CGSize(width: barRect.size.width/2, height: barRect.size.width/2))
                         rounded.fill()
                     }else{
                         context.fill(barRect)
